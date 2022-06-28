@@ -1,5 +1,9 @@
 ## monsters-rolodex App
-
+Display monster profiles.
+    __        ___
+ / o\      /o o\
+|   <      |   |
+ \__/      |,,,|
 
 ## App setup
 Run a single command 'npm install' to get this app installed.
