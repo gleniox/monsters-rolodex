@@ -8,7 +8,8 @@ class App extends Component {
     super();
 
     this.state = {
-      name: "Glenio",
+      name: { firstName: "Glenio", lastName: "Nogueira" },
+      company: "Microsoft",
     };
   }
 
@@ -17,10 +18,14 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>Hi {this.state.name}</p>
+          <p>
+            I'm {this.state.name.firstName}, I work at {this.state.company}
+          </p>
           <button
             onClick={() => {
-              this.setState({ name: "Xandre" });
+              // Shallow merge.
+              this.setState({ name: { ...this.state.name, firstName: "Thomas"} });
+              console.log(this.state);
             }}
           >
             Change Name
