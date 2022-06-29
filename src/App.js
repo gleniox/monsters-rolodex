@@ -1,3 +1,4 @@
+import React from "react";
 import { Component } from "react";
 
 import "./App.css";
@@ -7,18 +8,23 @@ class App extends Component {
     super();
 
     this.state = {
-      monsters: [
-        {
-          name: "Count Dracula",
-        },
-        {
-          name: "Gollum",
-        },
-        {
-          name: "Shrek",
-        },
-      ],
+      monsters: [],
     };
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) =>
+        this.setState(
+          () => {
+            return { monsters: users };
+          },
+          () => {
+            console.log(this.state);
+          }
+        )
+      );
   }
 
   render() {
@@ -26,7 +32,7 @@ class App extends Component {
       <div className="App">
         <h1>Monsters</h1>
         {this.state.monsters.map((monster) => {
-          return <p key={monster.name}>{monster.name}</p>;
+          return <div key={monster.id}>{monster.name}</div>;
         })}
       </div>
     );

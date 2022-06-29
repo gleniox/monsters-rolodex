@@ -1,3 +1,4 @@
+import React from 'react';
 import { Component } from "react";
 
 import logo from "./logo.svg";
@@ -19,7 +20,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            I'm {this.state.name.firstName}, I work at {this.state.company}
+            I am {this.state.name.firstName}, I work at {this.state.company}
           </p>
           <button
             onClick={() => {
