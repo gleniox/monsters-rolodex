@@ -9,6 +9,7 @@ class App extends Component {
 
     this.state = {
       monsters: [],
+      filteredMonsters: [],
     };
 
     console.log("constructor");
@@ -22,7 +23,7 @@ class App extends Component {
       .then((users) =>
         this.setState(
           () => {
-            return { monsters: users };
+            return { monsters: users, filteredMonsters: users };
           },
           () => {
             console.log(this.state);
@@ -41,16 +42,17 @@ class App extends Component {
           type="search"
           placeholder="Search monsters"
           onChange={(event) => {
-            console.log(event.target.value);
+            const monsterSearch = event.target.value.toLowerCase();
+            console.log(monsterSearch);
 
             const filteredMonsters = this.state.monsters.filter((monster) => {
-              return monster.name.includes(event.target.value);
+              return monster.name.toLowerCase().includes(monsterSearch);
             });
 
-            this.setState({ monsters: filteredMonsters });
+            this.setState({ filteredMonsters });
           }}
         />
-        {this.state.monsters.map((monster) => {
+        {this.state.filteredMonsters.map((monster) => {
           return <div key={monster.id}>{monster.name}</div>;
         })}
       </div>
