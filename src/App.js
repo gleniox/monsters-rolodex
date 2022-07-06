@@ -9,7 +9,7 @@ class App extends Component {
 
     this.state = {
       monsters: [],
-      filteredMonsters: [],
+      monsterSearch: '',
     };
 
     console.log("constructor");
@@ -23,7 +23,7 @@ class App extends Component {
       .then((users) =>
         this.setState(
           () => {
-            return { monsters: users, filteredMonsters: users };
+            return { monsters: users };
           },
           () => {
             console.log(this.state);
@@ -34,6 +34,11 @@ class App extends Component {
 
   render() {
     console.log("render");
+
+    const filteredMonsters = this.state.monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(this.state.monsterSearch);
+    });
+
     return (
       <div className="App">
         <h1>Monsters</h1>
@@ -45,14 +50,10 @@ class App extends Component {
             const monsterSearch = event.target.value.toLowerCase();
             console.log(monsterSearch);
 
-            const filteredMonsters = this.state.monsters.filter((monster) => {
-              return monster.name.toLowerCase().includes(monsterSearch);
-            });
-
-            this.setState({ filteredMonsters });
+            this.setState({ monsterSearch });
           }}
         />
-        {this.state.filteredMonsters.map((monster) => {
+        {filteredMonsters.map((monster) => {
           return <div key={monster.id}>{monster.name}</div>;
         })}
       </div>
