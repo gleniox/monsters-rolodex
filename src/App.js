@@ -12,13 +12,9 @@ class App extends Component {
       monsters: [],
       monsterSearch: "",
     };
-
-    console.log("constructor");
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
-
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((users) =>
@@ -27,7 +23,7 @@ class App extends Component {
             return { monsters: users };
           },
           () => {
-            console.log(this.state);
+            // console.log(this.state);
           }
         )
       );
@@ -35,14 +31,11 @@ class App extends Component {
 
   onMonsterSearchChange = (event) => {
     const monsterSearch = event.target.value.toLowerCase();
-    console.log(monsterSearch);
 
     this.setState({ monsterSearch });
   };
 
   render() {
-    console.log("render");
-
     const { monsters, monsterSearch } = this.state;
     const { onMonsterSearchChange } = this;
 
@@ -62,7 +55,7 @@ class App extends Component {
         {/* {filteredMonsters.map((monster) => {
           return <div key={monster.id}>{monster.name}</div>;
         })} */}
-        <CardList />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
