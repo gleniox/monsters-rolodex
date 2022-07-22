@@ -5,6 +5,7 @@ import { PropTypes } from "prop-types";
 
 class CardList extends Component {
   render() {
+    console.log('render from card-list');
     const { monsters } = this.props;
 
     return (
