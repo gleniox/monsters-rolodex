@@ -7,6 +7,7 @@ class CardList extends Component {
   render() {
     console.log('render from card-list');
     const { monsters } = this.props;
+    console.log(this.props);
 
     return (
       <div>
