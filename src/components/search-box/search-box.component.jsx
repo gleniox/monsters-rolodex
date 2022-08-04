@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Component } from "react";
 import { PropTypes } from "prop-types";
+import "./search-box.styles.css";
 
 class SearchBox extends Component {
   render() {
