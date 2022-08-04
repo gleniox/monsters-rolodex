@@ -4,11 +4,11 @@ import { PropTypes } from "prop-types";
 
 class SearchBox extends Component {
   render() {
-    const { onSearchChangeHandler, placeHolder} = this.props;
+    const { onSearchChangeHandler, placeHolder, className } = this.props;
 
     return (
       <input
-        className="search-box"
+        className={`search-box ${className}`}
         type="search"
         placeholder={placeHolder}
         onChange={onSearchChangeHandler}
@@ -19,7 +19,8 @@ class SearchBox extends Component {
 
 SearchBox.propTypes = {
   onSearchChangeHandler: PropTypes.func,
-  placeHolder: PropTypes.string
+  placeHolder: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default SearchBox;
