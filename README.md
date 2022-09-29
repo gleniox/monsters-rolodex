@@ -1,5 +1,5 @@
 # monsters-rolodex App
-This ReactJS app displays monster profiles.
+This ReactJS app displays monster profiles, allowing you to filter them.
 
 # App setup
 Run a single command 'npm install' to get this app installed.
