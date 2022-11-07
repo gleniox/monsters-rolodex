@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Component } from "react";
-
-import logo from "./logo.svg";
+import CardList from "./components/card-list/card-list.component";
+import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
 
 class App extends Component {
@@ -9,38 +9,51 @@ class App extends Component {
     super();
 
     this.state = {
-      name: { firstName: "Glenio", lastName: "Nogueira" },
-      company: "Microsoft",
+      monsters: [],
+      monsterSearch: "",
     };
   }
 
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) =>
+        this.setState(
+          () => {
+            return { monsters: users };
+          },
+          () => {
+            // console.log(this.state);
+          }
+        )
+      );
+  }
+
+  onMonsterSearchChange = (event) => {
+    const monsterSearch = event.target.value.toLowerCase();
+
+    this.setState({ monsterSearch });
+  };
+
   render() {
+    console.log("render from app");
+
+    const { monsters, monsterSearch } = this.state;
+    const { onMonsterSearchChange } = this;
+
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(monsterSearch);
+    });
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            I am {this.state.name.firstName}, I work at {this.state.company}
-          </p>
-          <button
-            onClick={() => {
-              // Shallow merge.
-              // Synchronous update.
-              this.setState(
-                () => {
-                  return {
-                    name: { ...this.state.name, firstName: "Thomas" },
-                  };
-                },
-                () => {
-                  console.log(this.state);
-                }
-              );
-            }}
-          >
-            Change Name
-          </button>
-        </header>
+        <h1 className="app-title">Monsters Rolodex</h1>
+        <SearchBox
+          className="monster-search-box"
+          onSearchChangeHandler={onMonsterSearchChange}
+          placeHolder={"Search monsters"}
+        />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
