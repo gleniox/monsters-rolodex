@@ -2,8 +2,8 @@
 import { PropTypes } from "prop-types";
 import "./card.styles.css";
 
-const CardContainer = (props) => {
-  const { id, name, email } = props.monster;
+const CardContainer = ({monster}) => {
+  const { id, name, email } = monster;
 
   return (
     <div className="card-container" key={id}>
